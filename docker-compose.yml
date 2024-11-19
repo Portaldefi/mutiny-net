@@ -1,7 +1,6 @@
 version: "3.7"
 
-x-logging:
-  &default-logging
+x-logging: &default-logging
   driver: "json-file"
   options:
     max-size: "50m"
@@ -25,6 +24,8 @@ services:
       PRIVKEY: $PRIVKEY
       SIGNETCHALLENGE: $SIGNETCHALLENGE
       EXTERNAL_IP: $EXTERNAL_IP
+      MINERENABLED: $MINERENABLED
+      ADDNODE: $ADDNODE
     ports:
       - "28332:28332"
       - "28333:28333"
@@ -41,36 +42,37 @@ services:
     stop_grace_period: 10m
     environment:
       RPCPASSWORD: $RPCPASSWORD
-    command: [
-      "--bitcoin.active",
-      "--bitcoin.signet",
-      "--bitcoin.node=bitcoind",
-      "--maxpendingchannels=10",
-      "--rpclisten=0.0.0.0:10009",
-      "--restlisten=0.0.0.0:8081",
-      "--bitcoind.rpchost=bitcoind:38332",
-      "--bitcoind.rpcuser=bitcoin",
-      "--bitcoind.rpcpass=$RPCPASSWORD",
-      "--bitcoind.zmqpubrawblock=tcp://bitcoind:28332",
-      "--bitcoind.zmqpubrawtx=tcp://bitcoind:28333",
-      "--db.bolt.auto-compact",
-      "--db.prune-revocation",
-      "--alias=Faucet LND",
-      "--externalip=mutinynet.com",
-      "--externalip=gfg7fwat27mnsmlog7wbgi6a53f2b5rj56bwokcfk45bacnb4z5kt5ad.onion",
-      "--tlsextradomain=mutinynet.com",
-      "--tlsextradomain=lnd",
-      "--protocol.option-scid-alias",
-      "--protocol.wumbo-channels",
-      "--accept-keysend",
-      "--minchansize=25000",
-      "--noseedbackup",
-      "--gc-canceled-invoices-on-startup",
-      "--coin-selection-strategy=random",
-      "--protocol.custom-message=513",
-      "--protocol.custom-nodeann=39",
-      "--protocol.custom-init=39",
-    ]
+    command:
+      [
+        "--bitcoin.active",
+        "--bitcoin.signet",
+        "--bitcoin.node=bitcoind",
+        "--maxpendingchannels=10",
+        "--rpclisten=0.0.0.0:10009",
+        "--restlisten=0.0.0.0:8081",
+        "--bitcoind.rpchost=bitcoind:38332",
+        "--bitcoind.rpcuser=bitcoin",
+        "--bitcoind.rpcpass=$RPCPASSWORD",
+        "--bitcoind.zmqpubrawblock=tcp://bitcoind:28332",
+        "--bitcoind.zmqpubrawtx=tcp://bitcoind:28333",
+        "--db.bolt.auto-compact",
+        "--db.prune-revocation",
+        "--alias=Faucet LND",
+        "--externalip=mutinynet.com",
+        "--externalip=gfg7fwat27mnsmlog7wbgi6a53f2b5rj56bwokcfk45bacnb4z5kt5ad.onion",
+        "--tlsextradomain=mutinynet.com",
+        "--tlsextradomain=lnd",
+        "--protocol.option-scid-alias",
+        "--protocol.wumbo-channels",
+        "--accept-keysend",
+        "--minchansize=25000",
+        "--noseedbackup",
+        "--gc-canceled-invoices-on-startup",
+        "--coin-selection-strategy=random",
+        "--protocol.custom-message=513",
+        "--protocol.custom-nodeann=39",
+        "--protocol.custom-init=39",
+      ]
     volumes:
       - ~/volumes/.lnd:/root/.lnd
     ports:
@@ -115,11 +117,11 @@ services:
       BITCOIN_REST_DOMAIN: bitcoind
       BITCOIN_REST_PORT: 38332
       LN_PEERS: 02465ed5be53d04fde66c9418ff14a5f2267723810176c9212b722e542dc1afb1b@lnd:9735 # lnd's node id
-    entrypoint: [ "rapid-gossip-sync-server" ]
+    entrypoint: ["rapid-gossip-sync-server"]
 
   postgres:
     container_name: "postgres"
-    image: 'postgres:12-alpine'
+    image: "postgres:12-alpine"
     logging: *default-logging
     restart: always
     stop_grace_period: 1m
@@ -141,7 +143,7 @@ services:
     restart: always
     stop_grace_period: 1m
     environment:
-      FLAGS: '-vvvv --signet-magic cb2ddfa5 --jsonrpc-import --daemon-dir /root/.bitcoin/signet --daemon-rpc-addr bitcoind:38332 --timestamp --blocks-dir /root/.bitcoin/signet/blocks --cookie=bitcoin:$RPCPASSWORD --db-dir /root/.electrs --network signet --electrum-rpc-addr 0.0.0.0:50001 --http-addr 0.0.0.0:3003'
+      FLAGS: "-vvvv --signet-magic cb2ddfa5 --jsonrpc-import --daemon-dir /root/.bitcoin/signet --daemon-rpc-addr bitcoind:38332 --timestamp --blocks-dir /root/.bitcoin/signet/blocks --cookie=bitcoin:$RPCPASSWORD --db-dir /root/.electrs --network signet --electrum-rpc-addr 0.0.0.0:50001 --http-addr 0.0.0.0:3003"
     volumes:
       - ~/volumes/electrs:/root/.electrs
     ports:
@@ -149,7 +151,7 @@ services:
       - "50001:50001"
   nutshell:
     container_name: "nutshell"
-    image: 'cashubtc/nutshell:0.15.2'
+    image: "cashubtc/nutshell:0.15.2"
     logging: *default-logging
     restart: always
     stop_grace_period: 1m
@@ -164,7 +166,7 @@ services:
       MINT_LND_REST_ENDPOINT: "https://lnd:8081"
       MINT_LND_REST_CERT: "/root/.lnd/tls.cert"
       MINT_LND_REST_MACAROON: "/root/.lnd/data/chain/bitcoin/signet/admin.macaroon"
-    command: [ "poetry", "run", "mint" ]
+    command: ["poetry", "run", "mint"]
     volumes:
       - ~/volumes/.lnd:/root/.lnd:ro
       - ~/volumes/nutshell:/root/.cashu
