@@ -106,6 +106,8 @@ services:
       - bitcoind
     depends_on:
       - postgres
+    ports:
+      - "8000:8000"
     environment:
       RAPID_GOSSIP_SYNC_SERVER_DB_HOST: postgres
       RAPID_GOSSIP_SYNC_SERVER_DB_USER: lightning-rgs
