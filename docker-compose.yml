@@ -42,12 +42,11 @@ services:
     stop_grace_period: 10m
     environment:
       RPCPASSWORD: $RPCPASSWORD
-    command:
-      [
+    command: [
         "--bitcoin.active",
         "--bitcoin.signet",
         "--bitcoin.node=bitcoind",
-        "--maxpendingchannels=10",
+        # "--maxpendingchannels=10",
         "--rpclisten=0.0.0.0:10009",
         "--restlisten=0.0.0.0:8081",
         "--bitcoind.rpchost=bitcoind:38332",
@@ -58,9 +57,9 @@ services:
         "--db.bolt.auto-compact",
         "--db.prune-revocation",
         "--alias=Faucet LND",
-        "--externalip=mutinynet.com",
-        "--externalip=gfg7fwat27mnsmlog7wbgi6a53f2b5rj56bwokcfk45bacnb4z5kt5ad.onion",
-        "--tlsextradomain=mutinynet.com",
+        # "--externalip=mutinynet.com",
+        # "--externalip=gfg7fwat27mnsmlog7wbgi6a53f2b5rj56bwokcfk45bacnb4z5kt5ad.onion",
+        # "--tlsextradomain=mutinynet.com",
         "--tlsextradomain=lnd",
         "--protocol.option-scid-alias",
         "--protocol.wumbo-channels",
