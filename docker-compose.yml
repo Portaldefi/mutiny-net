@@ -115,7 +115,7 @@ services:
       RAPID_GOSSIP_SYNC_SERVER_SNAPSHOT_INTERVAL: 3600 # 1 hour
       BITCOIN_REST_DOMAIN: bitcoind
       BITCOIN_REST_PORT: 38332
-      LN_PEERS: 02465ed5be53d04fde66c9418ff14a5f2267723810176c9212b722e542dc1afb1b@lnd:9735 # lnd's node id
+      LN_PEERS: 02431807fe68ef7156dd20fac8000c2ceda2e0494d2a409f71a9f30b054b3de904@lnd:9735 # lnd's node id
     entrypoint: ["rapid-gossip-sync-server"]
 
   postgres:
