@@ -119,7 +119,20 @@ services:
       BITCOIN_REST_PORT: 38332
       LN_PEERS: 02431807fe68ef7156dd20fac8000c2ceda2e0494d2a409f71a9f30b054b3de904@lnd:9735 # lnd's node id
     entrypoint: ["rapid-gossip-sync-server"]
-
+  dufs:
+    image: sigoden/dufs:latest
+    restart: on-failure
+    container_name: dufs.portal
+    entrypoint:
+      - /bin/dufs
+      - /files
+    environment:
+      - DUFS_BIND=0.0.0.0
+      - DUFS_PORT=8001
+    volumes:
+      - /home/ubuntu/volumes/rgs:/files
+    ports:
+      - 8001:8001
   postgres:
     container_name: "postgres"
     image: "postgres:12-alpine"
