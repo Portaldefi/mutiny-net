@@ -1,0 +1,15 @@
+[general]
+
+cors-allow-origins = "*"
+
+log-level = "debug"
+
+[advanced]
+
+[[advanced.rewrites]]
+source = "/snapshot/{*}.bin"
+destination = "/res/symlinks/$1.bin"
+
+[[advanced.rewrites]]
+source = "/snapshot/{*}"
+destination = "/res/symlinks/$1.bin"

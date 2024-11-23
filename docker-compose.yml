@@ -106,8 +106,6 @@ services:
       - bitcoind
     depends_on:
       - postgres
-    ports:
-      - "8000:8000"
     environment:
       RAPID_GOSSIP_SYNC_SERVER_DB_HOST: postgres
       RAPID_GOSSIP_SYNC_SERVER_DB_USER: lightning-rgs
@@ -119,20 +117,15 @@ services:
       BITCOIN_REST_PORT: 38332
       LN_PEERS: 02431807fe68ef7156dd20fac8000c2ceda2e0494d2a409f71a9f30b054b3de904@lnd:9735 # lnd's node id
     entrypoint: ["rapid-gossip-sync-server"]
-  dufs:
-    image: sigoden/dufs:latest
+  rgs_files:
+    image: joseluisq/static-web-server:2
     restart: on-failure
-    container_name: dufs.portal
-    entrypoint:
-      - /bin/dufs
-      - /files
-    environment:
-      - DUFS_BIND=0.0.0.0
-      - DUFS_PORT=8001
+    container_name: rgs.portal
     volumes:
-      - /home/ubuntu/volumes/rgs:/files
+      - /home/ubuntu/volumes/rgs:/public
+      - /home/ubuntu/mutiny-net/nginx/config.toml:/config.toml
     ports:
-      - 8001:8001
+      - 8000:80
   postgres:
     container_name: "postgres"
     image: "postgres:12-alpine"
