@@ -123,7 +123,7 @@ services:
     container_name: rgs.portal
     volumes:
       - /home/ubuntu/volumes/rgs:/public
-      - /home/ubuntu/mutiny-net/nginx/config.toml:/config.toml
+      - /home/ubuntu/mutiny-net/nginx/rgs.toml:/config.toml
     ports:
       - 8000:80
   postgres:
