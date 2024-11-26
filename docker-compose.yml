@@ -26,6 +26,7 @@ services:
       EXTERNAL_IP: $EXTERNAL_IP
       MINERENABLED: $MINERENABLED
       ADDNODE: $ADDNODE
+      MINE_GENESIS: $MINE_GENESIS
     ports:
       - "28332:28332"
       - "28333:28333"
@@ -123,7 +124,7 @@ services:
     container_name: rgs.portal
     volumes:
       - /home/ubuntu/volumes/rgs:/public
-      - /home/ubuntu/mutiny-net/nginx/config.toml:/config.toml
+      - /home/ubuntu/mutiny-net/nginx/rgs.toml:/config.toml
     ports:
       - 8000:80
   postgres:
