@@ -7,6 +7,18 @@ x-logging: &default-logging
     max-file: "3"
 
 services:
+  caddy:
+    image: caddy:2.8.4-alpine
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - caddy:/data
+      - .Caddyfile:/etc/caddy/Caddyfile
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
   bitcoind:
     container_name: "bitcoind"
     build: .
@@ -109,7 +121,7 @@ services:
       - postgres
     environment:
       RAPID_GOSSIP_SYNC_SERVER_DB_HOST: postgres
-      RAPID_GOSSIP_SYNC_SERVER_DB_USER: lightning-rgs
+      RAPID_GOSSIP_SYNC_SERVER_DB_USER: postgres
       RAPID_GOSSIP_SYNC_SERVER_DB_PASSWORD: docker
       RAPID_GOSSIP_SYNC_SERVER_DB_NAME: ln_graph_sync
       RAPID_GOSSIP_SYNC_SERVER_NETWORK: signet
@@ -139,7 +151,7 @@ services:
     volumes:
       - ~/volumes/postgres:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: lightning-rgs
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: ln_graph_sync
   electrs:
@@ -279,3 +291,23 @@ services:
     stop_grace_period: 1m
     volumes:
       - ~/volumes/mysql/data:/var/lib/mysql
+
+  vss:
+    build:
+      context: ./vss-rs
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    restart: on-failure
+    stop_signal: SIGINT
+    environment:
+      CARGO_NET_GIT_FETCH_WITH_CLI: "true"
+      DATABASE_URL: postgres://postgres:docker@postgres/ln_graph_sync
+      SELF_HOST: "true"
+      RUST_LOG: "info"
