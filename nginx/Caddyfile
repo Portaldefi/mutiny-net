@@ -1,0 +1,20 @@
+storage.{$SUBDOMAIN} {
+    reverse_proxy http://vss:8080
+}
+
+rgs.{$SUBDOMAIN} {
+    reverse_proxy http://rgs.portal:8000
+}
+
+esplora.{$SUBDOMAIN} {
+    reverse_proxy http://electrs:3003
+}
+
+lp1.{$SUBDOMAIN}  {
+        tls /home/ubuntu/volumes/.lnd/tls.cert /home/ubuntu/volumes/.lnd/tls.key
+        reverse_proxy https://lnd:8081 {
+                transport http {
+                        tls_insecure_skip_verify
+                }
+        }
+}
