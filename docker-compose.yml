@@ -96,6 +96,11 @@ services:
       - "9735:9735"
       - "10009:10009"
       - "8081:8081"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 1000000
+        hard: 1000000
 
   rgs_server:
     container_name: "rgs-server"
