@@ -3,7 +3,7 @@ storage.{$SUBDOMAIN} {
 }
 
 rgs.{$SUBDOMAIN} {
-    reverse_proxy http://rgs.portal:8000
+    reverse_proxy http://rgs.portal:80
 }
 
 esplora.{$SUBDOMAIN} {
