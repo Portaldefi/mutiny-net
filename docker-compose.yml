@@ -115,7 +115,7 @@ services:
       RAPID_GOSSIP_SYNC_SERVER_SNAPSHOT_INTERVAL: 10800 # 3 hours
       BITCOIN_REST_DOMAIN: bitcoind
       BITCOIN_REST_PORT: 38332
-      LN_PEERS: 02431807fe68ef7156dd20fac8000c2ceda2e0494d2a409f71a9f30b054b3de904@lnd:9735 # lnd's node id
+      LN_PEERS: 027695f737fe8a4edc54a16033ffb3e9df50a95eefb3c051503f046f8bc107fbfb@lnd:9735 # lnd's node id
     entrypoint: ["rapid-gossip-sync-server"]
   rgs_files:
     image: joseluisq/static-web-server:2
