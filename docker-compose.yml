@@ -267,3 +267,55 @@ services:
       nofile:
         soft: 1000000
         hard: 1000000
+
+  lnd2:
+    container_name: "lnd2"
+    image: lightninglabs/lnd:v0.18.2-beta
+    user: "0:1000"
+    logging: *default-logging
+    restart: always
+    stop_grace_period: 10m
+    environment:
+      RPCPASSWORD: $RPCPASSWORD
+    command: [
+        "--bitcoin.active",
+        "--bitcoin.signet",
+        "--bitcoin.node=bitcoind",
+        # "--maxpendingchannels=10",
+        "--listen=:9736",
+        "--rpclisten=0.0.0.0:10010",
+        "--restlisten=0.0.0.0:8082",
+        "--bitcoind.rpchost=bitcoind:38332",
+        "--bitcoind.rpcuser=bitcoin",
+        "--bitcoind.rpcpass=$RPCPASSWORD",
+        "--bitcoind.zmqpubrawblock=tcp://bitcoind:28332",
+        "--bitcoind.zmqpubrawtx=tcp://bitcoind:28333",
+        "--db.bolt.auto-compact",
+        "--db.prune-revocation",
+        "--alias=Portal Faucet LND 2",
+        # "--externalip=mutinynet.com",
+        # "--externalip=gfg7fwat27mnsmlog7wbgi6a53f2b5rj56bwokcfk45bacnb4z5kt5ad.onion",
+        "--tlsextradomain=lp2.$SUBDOMAIN",
+        "--tlsextradomain=lnd2",
+        "--protocol.option-scid-alias",
+        "--protocol.wumbo-channels",
+        "--accept-keysend",
+        "--minchansize=25000",
+        "--noseedbackup",
+        "--gc-canceled-invoices-on-startup",
+        "--coin-selection-strategy=random",
+        "--protocol.custom-message=513",
+        "--protocol.custom-nodeann=39",
+        "--protocol.custom-init=39",
+      ]
+    volumes:
+      - ~/volumes/.lnd2:/root/.lnd
+    ports:
+      - "9736:9736"
+      - "10010:10010"
+      - "8082:8082"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 1000000
+        hard: 1000000
