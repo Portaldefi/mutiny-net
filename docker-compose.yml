@@ -22,6 +22,11 @@ services:
       - host.docker.internal:host-gateway
     environment:
       SUBDOMAIN: $SUBDOMAIN
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 1000000
+        hard: 1000000
 
   bitcoind:
     container_name: "bitcoind"
