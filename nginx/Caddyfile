@@ -11,7 +11,7 @@ esplora.{$SUBDOMAIN} {
 }
 
 lp1.{$SUBDOMAIN}  {
-        tls /home/ubuntu/volumes/.lnd/tls.cert /home/ubuntu/volumes/.lnd/tls.key
+        tls /lnd/tls.cert /lnd/tls.key
         reverse_proxy https://lnd:8081 {
                 transport http {
                         tls_insecure_skip_verify
