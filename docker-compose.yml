@@ -231,7 +231,7 @@ services:
         "--bitcoin.active",
         "--bitcoin.signet",
         "--bitcoin.node=bitcoind",
-        # "--maxpendingchannels=10",
+        "--maxpendingchannels=100000",
         "--rpclisten=0.0.0.0:10009",
         "--restlisten=0.0.0.0:8081",
         "--bitcoind.rpchost=bitcoind:38332",
@@ -282,7 +282,7 @@ services:
         "--bitcoin.active",
         "--bitcoin.signet",
         "--bitcoin.node=bitcoind",
-        # "--maxpendingchannels=10",
+        "--maxpendingchannels=100000",
         "--listen=:9736",
         "--rpclisten=0.0.0.0:10010",
         "--restlisten=0.0.0.0:8082",
@@ -315,6 +315,58 @@ services:
       - "9736:9736"
       - "10010:10010"
       - "8082:8082"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 1000000
+        hard: 1000000
+
+  lnd3:
+    container_name: "lnd3"
+    image: lightninglabs/lnd:v0.18.2-beta
+    user: "0:1000"
+    logging: *default-logging
+    restart: always
+    stop_grace_period: 10m
+    environment:
+      RPCPASSWORD: $RPCPASSWORD
+    command: [
+        "--bitcoin.active",
+        "--bitcoin.signet",
+        "--bitcoin.node=bitcoind",
+        "--maxpendingchannels=100000",
+        "--listen=:9737",
+        "--rpclisten=0.0.0.0:10011",
+        "--restlisten=0.0.0.0:8083",
+        "--bitcoind.rpchost=bitcoind:38332",
+        "--bitcoind.rpcuser=bitcoin",
+        "--bitcoind.rpcpass=$RPCPASSWORD",
+        "--bitcoind.zmqpubrawblock=tcp://bitcoind:28332",
+        "--bitcoind.zmqpubrawtx=tcp://bitcoind:28333",
+        "--db.bolt.auto-compact",
+        "--db.prune-revocation",
+        "--alias=Portal Faucet LND 3",
+        # "--externalip=mutinynet.com",
+        # "--externalip=gfg7fwat27mnsmlog7wbgi6a53f2b5rj56bwokcfk45bacnb4z5kt5ad.onion",
+        "--tlsextradomain=lp3.$SUBDOMAIN",
+        "--tlsextradomain=lnd3",
+        "--protocol.option-scid-alias",
+        "--protocol.wumbo-channels",
+        "--accept-keysend",
+        "--minchansize=25000",
+        "--noseedbackup",
+        "--gc-canceled-invoices-on-startup",
+        "--coin-selection-strategy=random",
+        "--protocol.custom-message=513",
+        "--protocol.custom-nodeann=39",
+        "--protocol.custom-init=39",
+      ]
+    volumes:
+      - ~/volumes/.lnd3:/root/.lnd
+    ports:
+      - "9737:9737"
+      - "10011:10011"
+      - "8083:8083"
     ulimits:
       nproc: 65535
       nofile:
