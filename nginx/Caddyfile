@@ -27,3 +27,12 @@ lp2.{$SUBDOMAIN}  {
             }
     }
 }
+
+lp3.{$SUBDOMAIN}  {
+    tls /lnd3/tls.cert /lnd3/tls.key
+    reverse_proxy https://lnd3:8083 {
+            transport http {
+                    tls_insecure_skip_verify
+            }
+    }
+}
