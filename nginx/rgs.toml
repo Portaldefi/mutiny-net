@@ -4,6 +4,8 @@ cors-allow-origins = "*"
 
 log-level = "debug"
 
+cache-control-headers = false
+
 [advanced]
 
 [[advanced.rewrites]]
