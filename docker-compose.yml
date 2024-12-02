@@ -19,6 +19,7 @@ services:
       - ./nginx/Caddyfile:/etc/caddy/Caddyfile
       - ~/volumes/.lnd:/lnd:ro
       - ~/volumes/.lnd2:/lnd2:ro
+      - ~/volumes/.lnd3:/lnd3:ro
     extra_hosts:
       - host.docker.internal:host-gateway
     environment:
@@ -197,6 +198,15 @@ services:
     volumes:
       - ~/volumes/mysql/data:/var/lib/mysql
 
+  thunderhub:
+    image: apotdevin/thunderhub:v0.5.5
+    logging: *default-logging
+    restart: always
+    volumes:
+      - ~/volumes/.lnd:/lnd:ro
+      - ~/volumes/.lnd2:/lnd2:ro
+      - ~/volumes/.lnd3:/lnd3:ro
+
   vss:
     build:
       context: ./vss-rs
@@ -227,7 +237,8 @@ services:
     stop_grace_period: 10m
     environment:
       RPCPASSWORD: $RPCPASSWORD
-    command: [
+    command:
+      [
         "--bitcoin.active",
         "--bitcoin.signet",
         "--bitcoin.node=bitcoind",
@@ -242,8 +253,6 @@ services:
         "--db.bolt.auto-compact",
         "--db.prune-revocation",
         "--alias=Portal Faucet LND",
-        # "--externalip=mutinynet.com",
-        # "--externalip=gfg7fwat27mnsmlog7wbgi6a53f2b5rj56bwokcfk45bacnb4z5kt5ad.onion",
         "--tlsextradomain=lp1.$SUBDOMAIN",
         "--tlsextradomain=lnd",
         "--protocol.option-scid-alias",
@@ -256,6 +265,7 @@ services:
         "--protocol.custom-message=513",
         "--protocol.custom-nodeann=39",
         "--protocol.custom-init=39",
+        "--reset-wallet-transactions",
       ]
     volumes:
       - ~/volumes/.lnd:/root/.lnd
@@ -278,7 +288,8 @@ services:
     stop_grace_period: 10m
     environment:
       RPCPASSWORD: $RPCPASSWORD
-    command: [
+    command:
+      [
         "--bitcoin.active",
         "--bitcoin.signet",
         "--bitcoin.node=bitcoind",
@@ -294,8 +305,6 @@ services:
         "--db.bolt.auto-compact",
         "--db.prune-revocation",
         "--alias=Portal Faucet LND 2",
-        # "--externalip=mutinynet.com",
-        # "--externalip=gfg7fwat27mnsmlog7wbgi6a53f2b5rj56bwokcfk45bacnb4z5kt5ad.onion",
         "--tlsextradomain=lp2.$SUBDOMAIN",
         "--tlsextradomain=lnd2",
         "--protocol.option-scid-alias",
@@ -308,6 +317,7 @@ services:
         "--protocol.custom-message=513",
         "--protocol.custom-nodeann=39",
         "--protocol.custom-init=39",
+        "--reset-wallet-transactions",
       ]
     volumes:
       - ~/volumes/.lnd2:/root/.lnd
@@ -330,7 +340,8 @@ services:
     stop_grace_period: 10m
     environment:
       RPCPASSWORD: $RPCPASSWORD
-    command: [
+    command:
+      [
         "--bitcoin.active",
         "--bitcoin.signet",
         "--bitcoin.node=bitcoind",
@@ -346,8 +357,6 @@ services:
         "--db.bolt.auto-compact",
         "--db.prune-revocation",
         "--alias=Portal Faucet LND 3",
-        # "--externalip=mutinynet.com",
-        # "--externalip=gfg7fwat27mnsmlog7wbgi6a53f2b5rj56bwokcfk45bacnb4z5kt5ad.onion",
         "--tlsextradomain=lp3.$SUBDOMAIN",
         "--tlsextradomain=lnd3",
         "--protocol.option-scid-alias",
@@ -360,6 +369,7 @@ services:
         "--protocol.custom-message=513",
         "--protocol.custom-nodeann=39",
         "--protocol.custom-init=39",
+        "--reset-wallet-transactions",
       ]
     volumes:
       - ~/volumes/.lnd3:/root/.lnd
