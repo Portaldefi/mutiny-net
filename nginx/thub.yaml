@@ -3,14 +3,14 @@ accounts:
     serverUrl: 'lnd:10009'
     macaroonPath: '/lnd/data/chain/bitcoin/signet/admin.macaroon'
     certificatePath: '/lnd/tls.cert'
-    password: {YML_ENV_1}
+    password: '{YML_ENV_1}'
   - name: 'LND 2 (LP)'
     serverUrl: 'lnd:10010'
     macaroonPath: '/lnd2/data/chain/bitcoin/signet/admin.macaroon'
     certificatePath: '/lnd2/tls.cert'
-    password: {YML_ENV_1}
+    password: '{YML_ENV_1}'
   - name: 'LND 3 (Peering)'
     serverUrl: 'lnd:10011'
     macaroonPath: '/lnd3/data/chain/bitcoin/signet/admin.macaroon'
     certificatePath: '/lnd3/tls.cert'
-    password: {YML_ENV_1}
+    password: '{YML_ENV_1}'
