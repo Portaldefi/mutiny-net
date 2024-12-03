@@ -203,6 +203,8 @@ services:
     logging: *default-logging
     container_name: "thunderhub"
     restart: always
+    environment:
+      YML_ENV_1: $THUNDERHUB_PASSWORD
     volumes:
       - ./nginx/thub.yaml:/data/thub.yaml
       - ./nginx/thub.env:/app/.env.local
