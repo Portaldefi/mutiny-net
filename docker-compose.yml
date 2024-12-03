@@ -205,6 +205,7 @@ services:
     restart: always
     volumes:
       - ./nginx/thub.yaml:/data/thub.yaml
+      - ./nginx/thub.env:/app/.env.local
       - ~/volumes/.lnd:/lnd:ro
       - ~/volumes/.lnd2:/lnd2:ro
       - ~/volumes/.lnd3:/lnd3:ro
