@@ -23,6 +23,15 @@ lp1.{$SUBDOMAIN}  {
         }
 }
 
+lnd.{$SUBDOMAIN}  {
+        tls /lnd/tls.cert /lnd/tls.key
+        reverse_proxy https://lnd:8081 {
+                transport http {
+                        tls_insecure_skip_verify
+                }
+        }
+}
+
 lp2.{$SUBDOMAIN}  {
     tls /lnd2/tls.cert /lnd2/tls.key
     reverse_proxy https://lnd2:8082 {

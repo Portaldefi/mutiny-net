@@ -201,6 +201,7 @@ services:
   thunderhub:
     image: apotdevin/thunderhub:v0.5.5
     logging: *default-logging
+    container_name: "thunderhub"
     restart: always
     volumes:
       - ~/volumes/.lnd:/lnd:ro
@@ -254,6 +255,7 @@ services:
         "--db.prune-revocation",
         "--alias=Portal Faucet LND",
         "--tlsextradomain=lp1.$SUBDOMAIN",
+        "--tlsextradomain=lnd.$SUBDOMAIN",
         "--tlsextradomain=lnd",
         "--protocol.option-scid-alias",
         "--protocol.wumbo-channels",
@@ -306,6 +308,7 @@ services:
         "--db.prune-revocation",
         "--alias=Portal Faucet LND 2",
         "--tlsextradomain=lp2.$SUBDOMAIN",
+        "--tlsextradomain=lnd2.$SUBDOMAIN",
         "--tlsextradomain=lnd2",
         "--protocol.option-scid-alias",
         "--protocol.wumbo-channels",
@@ -358,6 +361,7 @@ services:
         "--db.prune-revocation",
         "--alias=Portal Faucet LND 3",
         "--tlsextradomain=lp3.$SUBDOMAIN",
+        "--tlsextradomain=lnd3.$SUBDOMAIN",
         "--tlsextradomain=lnd3",
         "--protocol.option-scid-alias",
         "--protocol.wumbo-channels",
