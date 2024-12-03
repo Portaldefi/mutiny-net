@@ -2,6 +2,6 @@ masterPassword: 'lndpazz'
 accounts:
   - name: 'LND 1'
     serverUrl: 'lnd:10009'
-    macaroonPath: '/lnd/data/chain/bitcoin/signet/readonly.macaroon'
+    macaroonPath: '/lnd/data/chain/bitcoin/signet/admin.macaroon'
     certificatePath: '/lnd/tls.cert'
     password: 'lndpazz1'
