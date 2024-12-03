@@ -199,7 +199,7 @@ services:
       - ~/volumes/mysql/data:/var/lib/mysql
 
   thunderhub:
-    image: apotdevin/thunderhub:v0.5.5
+    image: ghcr.io/evanfeenstra/thunderhub:latest
     logging: *default-logging
     container_name: "thunderhub"
     restart: always
