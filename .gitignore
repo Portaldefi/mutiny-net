@@ -1,3 +1,4 @@
 .env
 notes
 *.secret.env
+nginx/thunderhub.yaml

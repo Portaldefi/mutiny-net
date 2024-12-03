@@ -204,9 +204,8 @@ services:
     container_name: "thunderhub"
     restart: always
     volumes:
-      - ./nginx/thub.yaml:/data/thub.yaml
+      - ./nginx/thunderhub.yaml:/data/thunderhub.yaml
       - ./nginx/thub.env:/app/.env.local
-      - ./nginx/thub.secret.env:/app/.env
       - ~/volumes/.lnd:/lnd:ro
       - ~/volumes/.lnd2:/lnd2:ro
       - ~/volumes/.lnd3:/lnd3:ro
