@@ -25,7 +25,7 @@ lp1.{$SUBDOMAIN}  {
 
 lnd.{$SUBDOMAIN}  {
         tls /lnd/tls.cert /lnd/tls.key
-        reverse_proxy https://lnd:8081 {
+        reverse_proxy https://lnd:10009 {
                 transport http {
                         tls_insecure_skip_verify
                 }
