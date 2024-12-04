@@ -60,7 +60,7 @@ services:
       - "38334:38334"
 
   rgs_server:
-    container_name: "rgs-server"
+    container_name: "rgs_server"
     logging: *default-logging
     restart: always
     stop_grace_period: 1m
@@ -89,7 +89,7 @@ services:
   rgs_files:
     image: joseluisq/static-web-server:2
     restart: on-failure
-    container_name: rgs.portal
+    container_name: rgs_files
     volumes:
       - /home/ubuntu/volumes/rgs:/public
       - /home/ubuntu/mutiny-net/nginx/rgs.toml:/config.toml
@@ -128,13 +128,13 @@ services:
       - "3003:3003"
       - "50001:50001"
 
-  web:
-    container_name: "mempool_frontend"
+  mempool_web:
+    container_name: "mempool_web"
     environment:
       MAINNET_ENABLED: "false"
       ROOT_NETWORK: "signet"
       FRONTEND_HTTP_PORT: "8888"
-      BACKEND_MAINNET_HTTP_HOST: "api"
+      BACKEND_MAINNET_HTTP_HOST: "mempool_api"
       LIGHTNING: "true"
     image: mempool/frontend:latest
     user: "0:1000"
@@ -145,8 +145,8 @@ services:
     ports:
       - "8888:8888"
 
-  api:
-    container_name: "mempool_backend"
+  mempool_api:
+    container_name: "mempool_api"
     environment:
       MEMPOOL_NETWORK: "signet"
       MEMPOOL_BACKEND: "none"
