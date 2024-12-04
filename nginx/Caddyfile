@@ -10,22 +10,9 @@ esplora.{$SUBDOMAIN} {
     reverse_proxy http://electrs:3003
 }
 
-thunderhub.{$SUBDOMAIN} {
-    reverse_proxy http://thunderhub:3000
-}
-
 lp1.{$SUBDOMAIN}  {
         tls /lnd/tls.cert /lnd/tls.key
         reverse_proxy https://lnd:8081 {
-                transport http {
-                        tls_insecure_skip_verify
-                }
-        }
-}
-
-lnd.{$SUBDOMAIN}  {
-        tls /lnd/tls.cert /lnd/tls.key
-        reverse_proxy https://lnd:10009 {
                 transport http {
                         tls_insecure_skip_verify
                 }

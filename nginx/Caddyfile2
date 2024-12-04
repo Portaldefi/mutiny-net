@@ -1,0 +1,11 @@
+rgs.{$SUBDOMAIN} {
+    reverse_proxy http://rgs.portal:80
+}
+
+esplora.{$SUBDOMAIN} {
+    reverse_proxy http://electrs:3003
+}
+
+thunderhub.{$SUBDOMAIN} {
+    reverse_proxy http://thunderhub:3000
+}

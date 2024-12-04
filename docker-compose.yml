@@ -16,7 +16,7 @@ services:
       - 443:443
     volumes:
       - ~/volumes/caddy:/data
-      - ./nginx/Caddyfile:/etc/caddy/Caddyfile
+      - ${CADDYFILE:-./nginx/Caddyfile}:/etc/caddy/Caddyfile
       - ~/volumes/.lnd:/lnd:ro
       - ~/volumes/.lnd2:/lnd2:ro
       - ~/volumes/.lnd3:/lnd3:ro
