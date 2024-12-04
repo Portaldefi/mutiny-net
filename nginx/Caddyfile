@@ -1,9 +1,13 @@
+mempool.{$SUBDOMAIN} {
+    reverse_proxy http://mempool_web:8888
+}
+
 storage.{$SUBDOMAIN} {
     reverse_proxy http://vss:8080
 }
 
 rgs.{$SUBDOMAIN} {
-    reverse_proxy http://rgs.portal:80
+    reverse_proxy http://rgs_files:80
 }
 
 esplora.{$SUBDOMAIN} {
