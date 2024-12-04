@@ -160,7 +160,7 @@ services:
       CORE_RPC_PASSWORD: $RPCPASSWORD
       CORE_RPC_TIMEOUT: "60000"
       DATABASE_ENABLED: "true"
-      DATABASE_HOST: "db"
+      DATABASE_HOST: "mempool_db"
       DATABASE_DATABASE: "mempool"
       DATABASE_USERNAME: "mempool"
       DATABASE_PASSWORD: "mempool"
