@@ -1,8 +1,15 @@
+mempool.{$SUBDOMAIN} {
+    reverse_proxy http://mempool_web:8888
+}
+
 rgs.{$SUBDOMAIN} {
     reverse_proxy http://rgs.portal:80
 }
 
 esplora.{$SUBDOMAIN} {
+    handle_path /v1/fees/recommended {
+		reverse_proxy http://mempool_api:8999
+	}
     reverse_proxy http://electrs:3003
 }
 
