@@ -12,4 +12,4 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 docker-compose version
 
-sudo apt install git-all
+sudo apt install -y git-all
