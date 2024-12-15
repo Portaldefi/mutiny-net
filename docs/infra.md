@@ -44,7 +44,8 @@ flowchart TD
 
 aspiration:
 
-```mermaidflowchart TD
+```mermaid
+flowchart TD
 
     subgraph LiquidityProvider1
         BtcLP1[Bitcoind]
