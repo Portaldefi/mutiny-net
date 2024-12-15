@@ -47,13 +47,13 @@ flowchart TD
 ```mermaid
 flowchart TD
 
-    subgraph LiquidityProvider1
+    subgraph Liquidity Provider 1
         BtcLP1[Bitcoind]
         LND1LP1[LND]
         BtcLP1 --> LND1LP1
     end
 
-    subgraph LiquidityProvider2
+    subgraph Liquidity Provider 2
         BtcLP2[Bitcoind]
         LND1LP2[LND]
         BtcLP2 --> LND1LP2
@@ -68,7 +68,7 @@ flowchart TD
         LND1LP2 <--> |LN| LNDRouter
     end
 
-    subgraph Peer1
+    subgraph Peer 1
         Btc2[Bitcoind]
         LNDPeer[LND - Peering]
         Esplora(Esplora)
@@ -77,11 +77,17 @@ flowchart TD
         LNDRouter <--> |LN| LNDPeer
     end
 
-    subgraph RapidGossipSync
+    subgraph Rapid Gossip Sync
         Btc3[Bitcoind]
         RGS(RGS)
         Peers{{peers.json}}
         Btc3 --> RGS
+    end
+
+    subgraph Channel Backup
+        VSS(VSS)
+        Postgres(Postgres)
+        Postgres --> VSS
     end
 
     subgraph Apps
@@ -91,15 +97,16 @@ flowchart TD
         LNDPeer --> |LN| App
         Esplora --> |HTTP| App
         RGS --> |LN graph snapshots| App
+        VSS --> |HTTP| App
     end
 
-    subgraph Peer2
+    subgraph Peer 2
         B2[BTC ● LND ● Esplora]
     end
-    subgraph Peer3
+    subgraph Peer 3
         B3[BTC ● LND ● Esplora]
     end
-    subgraph Peer4
+    subgraph Peer 4
         B4[BTC ● LND ● Esplora]
     end
 
@@ -119,6 +126,7 @@ class LNDPeer lnd
 classDef rgs fill:#05330b
 class Esplora rgs
 class RGS rgs
+class VSS rgs
 
 classDef app fill:#2e3305
 class App app
