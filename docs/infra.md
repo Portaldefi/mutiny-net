@@ -1,6 +1,6 @@
-### infra
+# infra
 
-current infra:
+### current infra:
 
 ```mermaid
 flowchart TD
@@ -42,7 +42,7 @@ flowchart TD
 
 ```
 
-aspiration:
+### aspiration:
 
 ```mermaid
 flowchart TD
@@ -102,4 +102,25 @@ flowchart TD
     subgraph Peer4
         B4[BTC ● LND ● Esplora]
     end
+
+classDef btc fill:#331005
+class BtcLP1 btc
+class BtcLP2 btc
+class Btc2 btc
+class Btc3 btc
+class BTCR btc
+
+classDef lnd fill:#051b33
+class LND1LP1 lnd
+class LND1LP2 lnd
+class LNDRouter lnd
+class LNDPeer lnd
+
+classDef rgs fill:#05330b
+class Esplora rgs
+class RGS rgs
+
+classDef app fill:#2e3305
+class App app
+
 ```
