@@ -17,7 +17,9 @@ if [ -z "$peer" ]; then
     echo "...no peer..."
     exit 1
 fi
-echo "=> peer: $peer (portal-net-$1)"
+if [ "$2" != "newaddr" ]; then
+    echo "=> peer: $peer (portal-net-$1)"
+fi
 
 if [ "$2" == "ssh" ]; then
     $sssh@$peer
@@ -25,7 +27,7 @@ fi
 
 if [ "$2" == "deps" ]; then
     echo "Installing deps..."
-    $sssh@$peer "bash -s" < ./deps.sh
+    $sssh1@$peer "bash -s" < ./deps.sh
 fi
 
 if [ "$2" == "clone" ]; then
@@ -43,12 +45,14 @@ if [ "$2" == "newaddr" ]; then
 fi
 
 if [ "$2" == "open1" ]; then
-    $sssh@$peer -t "$ln connect $LP1@${peers["1"]}:9735"
+    echo "$ln connect $LP1@$(./peer.sh 1):9735"
+    $sssh@$peer -t "$ln connect $LP1@$(./peer.sh 1):9735"
     $sssh@$peer -t "$ln openchannel --local_amt 1000000000 --push_amt 490000000 $LP1"
 fi
 
 if [ "$2" == "open2" ]; then
-    $sssh@$peer -t "$ln connect $LP2@${peers["1"]}:9736"
+    echo "$ln connect $LP1@$(./peer.sh 1):9735"
+    $sssh@$peer -t "$ln connect $LP2@$(./peer.sh 1):9736"
     $sssh@$peer -t "$ln openchannel --local_amt 1000000000 --push_amt 490000000 $LP2"
 fi
 

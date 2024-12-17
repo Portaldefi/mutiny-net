@@ -6,6 +6,7 @@ BRANCH="portal-net"
 ADDNODE="3.137.8.82:38333"
 
 # -n makes ssh not read from stdin and allow loops 
+sssh1="ssh -i ../notes/portal-net.pem ubuntu"
 sssh="ssh -n -i ../notes/portal-net.pem -o LogLevel=QUIET ubuntu"
 ln="docker exec lnd lncli --network=signet"
 lnchans="$ln listchannels | jq -r '.channels | length'"
