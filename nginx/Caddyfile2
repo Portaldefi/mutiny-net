@@ -9,7 +9,7 @@ rgs.{$SUBDOMAIN} {
 esplora.{$SUBDOMAIN} {
     handle_path /v1/fees/recommended {
         rewrite * /api/v1/fees/recommended
-		reverse_proxy http://mempool_api:8999
+	    reverse_proxy http://mempool_api:8999
 	}
     reverse_proxy http://electrs:3003
 }
