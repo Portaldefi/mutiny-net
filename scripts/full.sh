@@ -21,8 +21,8 @@ echo "=> pay 100 btc to $ADDR"
 echo "=> waiting 60 for BTC..."
 sleep 60
 
-echo "=> waiting 60 for LND to startup..."
-sleep 60
+echo "=> waiting 300 for LND to startup..."
+sleep 300
 
 echo "=> open 1"
 ./peers.sh $PEER open1
