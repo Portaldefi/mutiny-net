@@ -29,4 +29,9 @@ utils () {
         $sssh@$peer -t "$ln listchannels --peer=$LP1" | jq -c -r "$formatchan"
         $sssh@$peer -t "$ln listchannels --peer=$LP1" | jq -c -r "$formatchan"
     fi
+
+    if [ "$2" == "findpeer" ]; then
+        echo "=> findpeer: $3"
+        $sssh@$peer -t "$ln listchannels --peer=$3" | jq -c -r "$formatchan"
+    fi
 }

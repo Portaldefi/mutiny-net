@@ -61,7 +61,7 @@ if [ "$2" == "pay" ]; then
     $sssh@$peer -t "$ln sendpayment --dest $LP2 --keysend --amt 1000"
 fi
 
-utils $peer $2
+utils $peer $2 $3
 
 fi # ===== end if not "all"
 
@@ -71,7 +71,7 @@ if [ "$1" == "all" ]; then
         key="${line%=*}"
         peer="${line#*=}"
         echo "=> peer: $peer (portal-net-$key)"
-        utils $peer $2
+        utils $peer $2 $3
     done < <(./peer.sh $1)
 
 fi
