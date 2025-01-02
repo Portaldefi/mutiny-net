@@ -10,7 +10,8 @@ sssh1="ssh -i ../notes/portal-net.pem ubuntu"
 sssh="ssh -n -i ../notes/portal-net.pem -o LogLevel=QUIET ubuntu"
 ln="docker exec lnd lncli --network=signet"
 lnchans="$ln listchannels | jq -r '.channels | length'"
-formatchan=".channels | .[] | {active,remote_pubkey,remote_balance,local_balance}"
+activechans="$ln listchannels --active_only | jq -r '.channels | length'"
+formatchan=".channels | .[] | {active,remote_pubkey,remote_balance,local_balance,chan_id,local_chan_reserve_sat,remote_chan_reserve_sat}"
 
 
 utils () {
@@ -21,13 +22,17 @@ utils () {
         $sssh@$peer -t "$lnchans"
     fi
 
+    if [ "$2" == "activechans" ]; then
+        $sssh@$peer -t "$activechans"
+    fi
+
     if [ "$2" == "id" ]; then
         $sssh@$peer -t "$ln getinfo" | jq -c -r {identity_pubkey}
     fi
     
     if [ "$2" == "lpchans" ]; then
         $sssh@$peer -t "$ln listchannels --peer=$LP1" | jq -c -r "$formatchan"
-        $sssh@$peer -t "$ln listchannels --peer=$LP1" | jq -c -r "$formatchan"
+        $sssh@$peer -t "$ln listchannels --peer=$LP2" | jq -c -r "$formatchan"
     fi
 
     if [ "$2" == "findpeer" ]; then
