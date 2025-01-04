@@ -231,6 +231,14 @@ services:
       SELF_HOST: "true"
       RUST_LOG: "info"
 
+  wsproxy:
+    container_name: wsproxy
+    logging: *default-logging
+    build:
+      context: ./ln-websocket-proxy
+      dockerfile: Dockerfile
+    restart: on-failure
+
   lnd:
     container_name: "lnd"
     image: lightninglabs/lnd:v0.18.2-beta

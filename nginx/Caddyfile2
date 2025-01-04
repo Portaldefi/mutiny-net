@@ -17,3 +17,7 @@ esplora.{$SUBDOMAIN} {
 thunderhub.{$SUBDOMAIN} {
     reverse_proxy http://thunderhub:3000
 }
+
+p.{$SUBDOMAIN} {
+    reverse_proxy wsproxy:3001
+}
