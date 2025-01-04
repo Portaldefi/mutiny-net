@@ -19,5 +19,5 @@ thunderhub.{$SUBDOMAIN} {
 }
 
 p.{$SUBDOMAIN} {
-    reverse_proxy wsproxy:3001
+    reverse_proxy wsproxy:8080
 }
