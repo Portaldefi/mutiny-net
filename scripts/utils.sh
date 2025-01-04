@@ -4,6 +4,7 @@ LP2="0296001d1e2e6ad17c95ee1109454f4148f3512f58894e924c7431a5b83bdc73a0"
 REPO="https://github.com/Portaldefi/mutiny-net.git"
 BRANCH="portal-net"
 ADDNODE="3.137.8.82:38333"
+ROUTER="02ae53985b2aabc67496da39534754be809c01f22e8bd20794cae4b88131bc96b8"
 
 # -n makes ssh not read from stdin and allow loops 
 sssh1="ssh -i ../notes/portal-net.pem ubuntu"

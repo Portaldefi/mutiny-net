@@ -51,9 +51,15 @@ if [ "$2" == "open1" ]; then
 fi
 
 if [ "$2" == "open2" ]; then
-    echo "$ln connect $LP1@$(./peer.sh 1):9735"
+    echo "$ln connect $LP2@$(./peer.sh 1):9736"
     $sssh@$peer -t "$ln connect $LP2@$(./peer.sh 1):9736"
     $sssh@$peer -t "$ln openchannel --local_amt 1000000000 --push_amt 490000000 $LP2"
+fi
+
+if [ "$2" == "openrouter" ]; then
+    echo "$ln connect $ROUTER@$(./peer.sh 100):9735"
+    $sssh@$peer -t "$ln connect $ROUTER@$(./peer.sh 100):9735"
+    $sssh@$peer -t "$ln openchannel --local_amt 1000000000 --push_amt 490000000 $ROUTER"
 fi
 
 if [ "$2" == "pay" ]; then

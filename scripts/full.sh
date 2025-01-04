@@ -24,20 +24,20 @@ sleep 60
 echo "=> waiting 480 for LND to startup..."
 sleep 480
 
-echo "=> open 1"
-./peers.sh $PEER open1
+# echo "=> open 1"
+# ./peers.sh $PEER open1
 
-echo "=> waiting 60 for change..."
-sleep 60
+# echo "=> waiting 60 for change..."
+# sleep 60
 
-echo "=> open 2"
-./peers.sh $PEER open2
+# echo "=> open 2"
+# ./peers.sh $PEER open2
 
-echo "=> waiting 330 for channels to confirm..."
-sleep 330
+# echo "=> waiting 330 for channels to confirm..."
+# sleep 330
 
-echo "=> pay to check"
-./peers.sh $PEER pay
+# echo "=> pay to check"
+# ./peers.sh $PEER pay
 
 echo "=> LN pubkey"
 ./peers.sh $PEER id
