@@ -8,6 +8,3 @@
 [submodule "vss-rs"]
 	path = vss-rs
 	url = https://github.com/Portaldefi/vss-rs.git
-[submodule "ln-websocket-proxy"]
-	path = ln-websocket-proxy
-	url = https://github.com/Portaldefi/ln-websocket-proxy.git
