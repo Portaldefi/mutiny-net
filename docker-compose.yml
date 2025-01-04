@@ -234,9 +234,10 @@ services:
   wsproxy:
     container_name: wsproxy
     logging: *default-logging
-    build:
-      context: ./ln-websocket-proxy
-      dockerfile: Dockerfile
+    image: ghcr.io/evanfeenstra/ln-websocket-proxy:latest
+    # build:
+    #   context: ./ln-websocket-proxy
+    #   dockerfile: Dockerfile
     restart: on-failure
 
   lnd:
