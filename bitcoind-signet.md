@@ -9,7 +9,7 @@
   * if `MINERENABLED=1` and not provided will generate this
 * `MINETO` - mine to a static address, if not provided will make new address for each block (**mining mode only**)
 * `SIGNETCHALLENGE` - sets the valid block producer for this signet
-  * if `MINERENABLED=1` and not provided will generate this, if provded PRIVKEY also must be populated
+  * if `MINERENABLED=1` and not provided will generate this, if provided PRIVKEY also must be populated
   * Requied for client-mode
   * 
 * `RPCUSER` - bitcoind RPC User
