@@ -1,3 +1,11 @@
+{
+	servers {
+		timeouts {
+			idle 2h
+		}
+	}
+}
+
 mempool.{$SUBDOMAIN} {
     reverse_proxy http://mempool_web:8888
 }
