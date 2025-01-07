@@ -239,6 +239,8 @@ services:
     #   context: ./ln-websocket-proxy
     #   dockerfile: Dockerfile
     restart: on-failure
+    environment:
+      LN_PROXY_PORT: 3001
 
   lnd:
     container_name: "lnd"
