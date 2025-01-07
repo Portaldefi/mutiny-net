@@ -1,5 +1,6 @@
 {
 	servers {
+        keepalive_interval 5s
 		timeouts {
 			idle 2h
 		}
