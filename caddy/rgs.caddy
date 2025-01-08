@@ -1,0 +1,3 @@
+rgs.{$SUBDOMAIN} {
+    reverse_proxy http://rgs.portal:80
+}

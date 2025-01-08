@@ -1,0 +1,3 @@
+p.{$SUBDOMAIN} {
+    reverse_proxy wsproxy:3001
+}

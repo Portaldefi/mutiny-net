@@ -1,0 +1,3 @@
+storage.{$SUBDOMAIN} {
+    reverse_proxy http://vss:8080
+}
