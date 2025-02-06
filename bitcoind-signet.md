@@ -1,7 +1,3 @@
-Вот полностью переписанная документация на английском языке:
-
----
-
 # Bitcoin Signet Docker Image
 
 ## ENV Variables
