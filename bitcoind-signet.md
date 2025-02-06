@@ -1,33 +1,52 @@
 # Bitcoin Signet Docker Image
+
 ## ENV Variables
 
-* `BLOCKPRODUCTIONDELAY` - default sleep period between mining blocks (**mining mode only**)
-  * if ~/.bitcoin/BLOCKPRODUCTIONDELAY.txt is present will use this value, allowing the delay to be dynamically changed.
-* `MINERENABLED` - flag for enabling mining chain
-* `NBITS` - sets min difficulty in mining (**mining mode only**)
-* `PRIVKEY` - private key of signet signer (**mining mode only**)
-  * if `MINERENABLED=1` and not provided will generate this
-* `MINETO` - mine to a static address, if not provided will make new address for each block (**mining mode only**)
-* `SIGNETCHALLENGE` - sets the valid block producer for this signet
-  * if `MINERENABLED=1` and not provided will generate this, if provded PRIVKEY also must be populated
-  * Requied for client-mode
-  * 
-* `RPCUSER` - bitcoind RPC User
-* `RPCPASSWORD` - bitcoind RPC password
-* 
-* `ONIONPROXY` - tor SOCK5 endpoint
-* `TORPASSWORD` - tor control port password
-* `TORCONTROL` - tor control port endpoint
-* `I2PSAM` - I2P control endpoint
-* `UACOMMENT` - UA Comment which would show on bitcoin-cli -netinfo printout
-* 
-* `ZMQPUBRAWBLOCK` - bitcoind setting
-* `ZMQPUBRAWTX` - bitcoind setting
-* `ZMQPUBHASHBLOCK` - bitcoind setting
-* 
-* `RPCBIND` - bitcoind setting
-* `RPCALLOWIP` - bitcoind setting
-* `WHITELIST` - bitcoind setting
-* `ADDNODE` - add seeding node location, comma-separate for multiple nodes  (needed for client-mode)
-* `EXTERNAL_IP` - add public IP/onion endpoint information, comma-seperated for multiple IPs.
+* **`BLOCKPRODUCTIONDELAY`** — Delay between mining blocks (**mining mode only**).  
+  If `~/.bitcoin/BLOCKPRODUCTIONDELAY.txt` is present, it will use the value from this file, allowing the delay to be dynamically adjusted.
+
+* **`MINERENABLED`** — Flag to enable the mining chain.
+
+* **`NBITS`** — Sets the minimum difficulty for mining (**mining mode only**).
+
+* **`PRIVKEY`** — Private key for the signet signer (**mining mode only**).  
+  If `MINERENABLED=1` and not provided, a new key will be generated.
+
+* **`MINETO`** — Address to mine to. If not provided, a new address will be generated for each block (**mining mode only**).
+
+* **`SIGNETCHALLENGE`** — Sets the valid block producer for this signet.  
+  If `MINERENABLED=1` and not provided, it will generate one. If provided, `PRIVKEY` must also be populated.  
+  **Required for client mode.**
+
+* **`RPCUSER`** — RPC username for connecting to bitcoind.
+
+* **`RPCPASSWORD`** — RPC password for connecting to bitcoind.
+
+* **`ONIONPROXY`** — Tor SOCKS5 proxy endpoint.
+
+* **`TORPASSWORD`** — Tor control port password.
+
+* **`TORCONTROL`** — Tor control port endpoint.
+
+* **`I2PSAM`** — I2P control endpoint.
+
+* **`UACOMMENT`** — User Agent comment that will show in the `bitcoin-cli -netinfo` printout.
+
+* **`ZMQPUBRAWBLOCK`** — bitcoind setting for publishing raw block data.
+
+* **`ZMQPUBRAWTX`** — bitcoind setting for publishing raw transaction data.
+
+* **`ZMQPUBHASHBLOCK`** — bitcoind setting for publishing block hash data.
+
+* **`RPCBIND`** — bitcoind setting for binding RPC.
+
+* **`RPCALLOWIP`** — bitcoind setting for allowed IP addresses.
+
+* **`WHITELIST`** — bitcoind setting for whitelisted IP addresses.
+
+* **`ADDNODE`** — Add seeding node location (comma-separated for multiple nodes).  
+  **Required for client mode.**
+
+* **`EXTERNAL_IP`** — Add public IP or Onion endpoint information (comma-separated for multiple IPs).
+
 
